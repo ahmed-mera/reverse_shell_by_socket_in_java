@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Reverse-Shell.iml" filepath="$PROJECT_DIR$/Reverse-Shell.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Reverse Shell.iml" filepath="$PROJECT_DIR$/Reverse Shell.iml" />
     </modules>
   </component>
 </project>
