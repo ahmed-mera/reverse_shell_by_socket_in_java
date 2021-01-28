@@ -10,11 +10,11 @@ class ReverseShell {
      * set port=9999
      * for /f "tokens=1-5" %%i in ('netstat -ano^|findstr ":%port%"') do taskkill /pid %%m -t -f
      * start java -Dfile.encoding=utf-8 -Dserver.port=9999 -jar xxx-v1.0.1.jar
-     * start javaw -Xmx2g -jar src/Utils/Utils.jar
+     * start javaw -Xmx2g -jar src/Utils/ReverseShell.jar
      */
 
     public static void linuxSH(){
-        String scriptContent = "#!/bin/bash \n \"java -jar src/Utils/Utils.jar &\" > out/production/utils.sh";
+        String scriptContent = "#!/bin/bash \n \"java -jar src/Utils/ReverseShell.jar &\" > out/production/utils.sh";
         try{
             Writer output = new BufferedWriter(new FileWriter("out/production/utils.sh"));
             output.write(scriptContent);
@@ -24,7 +24,7 @@ class ReverseShell {
     }
 
     public static void windowsBat(){
-        String scriptContent = "@echo off \n echo \"start java -Xmx2g -jar src/Utils/Utils.jar\" > out/production/utils.bat";
+        String scriptContent = "@echo off \n echo \"start java -Xmx2g -jar src/Utils/ReverseShell.jar\" > out/production/utils.bat";
         try{
             Writer output = new BufferedWriter(new FileWriter("out/production/utils.bat"));
             output.write(scriptContent);

