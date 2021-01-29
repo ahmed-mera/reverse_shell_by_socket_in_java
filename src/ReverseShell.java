@@ -20,7 +20,7 @@ class ReverseShell {
 
     /**
      * @echo off
-     * set port=9999
+     * set port=4444
      * for /f "tokens=1-5" %%i in ('netstat -ano^|findstr ":%port%"') do taskkill /pid %%m -t -f
      * start java -Dfile.encoding=utf-8 -Dserver.port=9999 -jar xxx-v1.0.1.jar
      * start javaw -Xmx2g -jar src/Utils/ReverseShell.jar
