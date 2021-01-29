@@ -124,7 +124,7 @@ cmake-build-*/
 # IntelliJ
 out
 .idea/
-
+reverse_shell_socket_java.iml
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
